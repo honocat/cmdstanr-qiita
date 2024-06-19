@@ -56,7 +56,8 @@ post |>
                 y = beta2,         # トレースプロットを確認したいパラメタ
                 color = chains)) + # チェインによって色を変える
   labs(x = 'iteration' , y = expression(beta[2])) +
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = 'none')  # 凡例を消す（必須ではない）
 
 ## 結果の可視化
 post |>
@@ -64,11 +65,10 @@ post |>
   geom_histogram(aes(x = beta2,
                      y = after_stat(density)),
                  color = 'black') +
-  geom_vline(xintercept = 0, color = 'tomato') +
   labs(x = expression(beta[2]), y = '密度') +
   theme_minimal()
-### beta2が正になる確率
-mean(post$beta2 > 0)
+### beta2が1.17より大きくなる確率
+mean(post$beta2 > 1.17)
 
 # 付録
 ## 分析前の可視化．
@@ -78,15 +78,16 @@ myd |>
   geom_histogram(aes(x = sales,
                      y = after_stat(density)),
                  color = 'black') +
-  labs(x = '売上（個数）', y = '密度') +
+  labs(x = 'ビールの売上（個数）', y = '密度') +
   theme_minimal()
 
 ### 気温と売上の関係（散布図）．
 myd |>
-  ggplot() +
-  geom_point(aes(x = temperature,
-                 y = sales)) +
-  labs(x = '気温（度）', y = '売上（個数）') +
+  ggplot(aes(x = temperature,
+             y = sales)) +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  labs(x = '気温（度）', y = 'ビールの売上（個数）') +
   theme_minimal()
 
 ## 事前分布の可視化．
@@ -108,7 +109,7 @@ tibble(x = seq(0, 30, length.out = 100)) |>
 
 ## postdens_onesideplot()を使った可視化
 postdens_onesideplot(post$beta2,                 # 可視化したいパラメタ
-                     cutpoint = 0,               # カットポイント
+                     cutpoint = 1.17,            # カットポイント
                      xlab = expression(beta[2]), # x軸のラベル
-                     ylab = '密度') +            # y 軸のラベル
+                     ylab = '密度') +            # y軸のラベル
   theme_minimal()
