@@ -1,6 +1,6 @@
 # ベイズ推定のためのCmdStan
 
-[『ベイズ推定のためのCmdStan』](https://qiita.com/Honoka-Nakano/items/b26222aec402b9ecabf9)（Qiita）
+[『ベイズ推定のためのCmdStan』](https://qiita.com/honocat/items/b26222aec402b9ecabf9)（Qiita）
 
 **概要**
 
@@ -8,4 +8,4 @@
 
 そこで用いたデータとソースコードを公開しています．
 
-[著者のページ](https://Honoka-Nakano.github.io/)
+[著者のページ](https://honocat.github.io/)
